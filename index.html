@@ -8,6 +8,13 @@
 </head>
 <body>
 
+  <!-- AUTO REDIRECT IF ALREADY LOGGED IN -->
+  <script>
+    if (localStorage.getItem("loggedIn") === "true") {
+      window.location.href = "home.html";
+    }
+  </script>
+
   <div class="auth-container">
 
     <h2 class="main-title">Welcome to Product Finder</h2>
