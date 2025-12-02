@@ -35,15 +35,30 @@
 
   <script>
     function searchProduct() {
-      const query = document.getElementById("searchInput").value.trim();
-      if (!query) {
-        alert("Please enter product name!");
-        return;
-      }
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
 
-      localStorage.setItem("searchQuery", query);
-      window.location.href = "products.html";
-    }
+  if (!query) {
+    alert("Please enter product name!");
+    return;
+  }
+
+  // Get all products from localStorage
+  const products = JSON.parse(localStorage.getItem("products")) || [];
+
+  // Filter products by name
+  const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+
+  if (filtered.length === 0) {
+    alert("No product found!");
+    return;
+  }
+
+  // Save search results in localStorage to show in products.html
+  localStorage.setItem("searchResult", JSON.stringify(filtered));
+
+  // Redirect to products page
+  window.location.href = "products.html";
+}
 
     function goCategory() {
       window.location.href = "category.html";
