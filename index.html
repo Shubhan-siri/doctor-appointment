@@ -1,0 +1,71 @@
+<!-- =================== index.html =================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketplace Website</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+<h1>Marketplace Platform</h1>
+<div id="user-info"></div>
+</header>
+
+
+<div class="container">
+<!-- Signup Box -->
+<div id="signup-box" class="card">
+<h2>Sign Up</h2>
+<input type="text" id="name" placeholder="Name" />
+<input type="email" id="email" placeholder="Email" />
+<input type="password" id="password" placeholder="Password" />
+<button onclick="signup()">Sign Up</button>
+<p id="signup-error" class="error"></p>
+</div>
+
+
+<!-- Search & Category Box -->
+<div class="card">
+<h2>Search Products</h2>
+<input type="text" id="search" placeholder="Search product..." onkeyup="filterProducts()" />
+
+
+<h3>Category</h3>
+<select id="category" onchange="filterProducts()">
+<option>All</option>
+<option>Grains</option>
+<option>Fruits</option>
+<option>Vegetables</option>
+<option>Oils</option>
+</select>
+</div>
+
+
+<!-- Products Box -->
+<div class="card">
+<h2>Products</h2>
+<div id="product-list" class="grid"></div>
+</div>
+
+
+<!-- Product Details Popup -->
+<div id="popup" class="popup hide">
+<div class="popup-content">
+<span class="close" onclick="closePopup()">×</span>
+<h2 id="p-name"></h2>
+<p id="p-category"></p>
+<p id="p-price"></p>
+<p><strong>Gate Number:</strong> <span id="p-gate"></span></p>
+
+
+<div id="broker-box"></div>
+</div>
+</div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
