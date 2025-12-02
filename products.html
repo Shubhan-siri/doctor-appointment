@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products</title>
+  <title>Available Products</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Search box styling */
     #searchBox {
       width: 100%;
       padding: 10px;
@@ -41,13 +40,11 @@
 <body>
 
   <div class="navbar">
-    <h2>Products</h2>
+    <h2>Available Products</h2>
     <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
   <div class="container">
-
-    <h3>Available Products</h3>
 
     <!-- Search box -->
     <input type="text" id="searchBox" placeholder="Search products..." />
@@ -58,13 +55,12 @@
   </div>
 
   <script>
-    // Logout function
     function logout() {
       localStorage.removeItem("loggedIn"); // sirf login state clear
       window.location.href = "index.html";
     }
 
-    // Initialize default products if missing
+    // Initialize default products
     let allProducts = JSON.parse(localStorage.getItem("products")) || [];
 
     if (!allProducts.some(p => p.name === "Machine Rice Flour")) {
@@ -119,7 +115,6 @@
     // Initial display on page load
     window.onload = function () {
       displayProducts(allProducts); // Always show full products list
-      localStorage.removeItem("searchResult"); // Clear previous search results
     };
 
     // Live search
