@@ -13,7 +13,6 @@ function signup() {
   alert("Signup successful! Now please Sign In.");
 }
 
-
 // LOGIN FUNCTION
 function login() {
   const email = document.getElementById("loginEmail").value.trim();
@@ -37,24 +36,32 @@ function login() {
 
 // Add default product to localStorage if not exists
 window.onload = function() {
-  if (!localStorage.getItem("products")) {
-    const defaultProduct = [
-      {
-        name: "Machine Rice Flour",
-        category: "Machinery",
-        price: 200000,
-        gate: 12,
-        broker: "+91 9876543210"
-      },
-      {   // <-- comma was missing above
-        name: "Wheet Floor Machine",
-        category: "Machinery",
-        price: 150000,   // yahan price change kar sakte ho
-        gate: 15,        // yahan gate number
-        broker: "+91 9876543211" // yahan broker number
-      }
-    ];
-    localStorage.setItem("products", JSON.stringify(defaultProduct));
-  }
-};
+  let products = JSON.parse(localStorage.getItem("products")) || [];
 
+  // Check if Machine Rice Flour exists
+  const riceExists = products.some(p => p.name === "Machine Rice Flour");
+  if (!riceExists) {
+    products.push({
+      name: "Machine Rice Flour",
+      category: "Machinery",
+      price: 200000,
+      gate: 12,
+      broker: "+91 9876543210"
+    });
+  }
+
+  // Check if Wheet Floor Machine exists
+  const wheetExists = products.some(p => p.name === "Wheet Floor Machine");
+  if (!wheetExists) {
+    products.push({
+      name: "Wheet Floor Machine",
+      category: "Machinery",
+      price: 150000,
+      gate: 15,
+      broker: "+91 9876543211"
+    });
+  }
+
+  // Save updated products back to localStorage
+  localStorage.setItem("products", JSON.stringify(products));
+};
