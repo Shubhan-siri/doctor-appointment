@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Products</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Search box styling */
+    #searchBox {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+  </style>
 </head>
 
 <body>
@@ -18,7 +29,10 @@
 
     <h3>Available Product</h3>
 
-    <!-- Dynamic product list ke liye div -->
+    <!-- Search box -->
+    <input type="text" id="searchBox" placeholder="Search products..." />
+
+    <!-- Dynamic product list -->
     <div id="productList"></div>
 
   </div>
@@ -29,12 +43,14 @@
       window.location.href = "index.html";
     }
 
-    // Products ko localStorage se fetch aur display karne ka code
-    window.onload = function () {
-      let products = JSON.parse(localStorage.getItem("searchResult")) || JSON.parse(localStorage.getItem("products")) || [];
+    // Fetch all products from localStorage
+    const allProducts = JSON.parse(localStorage.getItem("products")) || [];
 
-      const productList = document.getElementById("productList");
+    const productList = document.getElementById("productList");
+    const searchBox = document.getElementById("searchBox");
 
+    // Function to display products
+    function displayProducts(products) {
       if (products.length === 0) {
         productList.innerHTML = "<p>No products available.</p>";
         return;
@@ -54,10 +70,29 @@
       });
 
       productList.innerHTML = html;
+    }
 
-      // Search result clear kar de
-      localStorage.removeItem("searchResult");
+    // Initial display
+    window.onload = function () {
+      // If searchResult exists, show that first
+      const searchResult = JSON.parse(localStorage.getItem("searchResult"));
+      if (searchResult && searchResult.length > 0) {
+        displayProducts(searchResult);
+        localStorage.removeItem("searchResult");
+      } else {
+        displayProducts(allProducts);
+      }
     };
+
+    // Live search
+    searchBox.addEventListener("input", function () {
+      const query = searchBox.value.toLowerCase();
+      const filtered = allProducts.filter(p =>
+        p.name.toLowerCase().includes(query) || 
+        p.category.toLowerCase().includes(query)
+      );
+      displayProducts(filtered);
+    });
   </script>
 
 </body>
