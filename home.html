@@ -11,45 +11,44 @@
 
   <div class="navbar">
     <h2>Product Finder</h2>
-    <button onclick="logout()">Logout</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
   <div class="home-container">
     <h3>Welcome!</h3>
-    <p>Find product by search or category</p>
+    <p>Find products by search or category</p>
 
     <input type="text" id="searchInput" placeholder="Enter product name..." />
     <button class="btn" onclick="searchProduct()">Search Product</button>
 
-    <h4>Or</h4>
+    <h4>OR</h4>
 
     <button class="btn category-btn" onclick="goCategory()">Select Category</button>
   </div>
 
   <script>
-    // Search route
+    
     function searchProduct() {
-      const query = document.getElementById("searchInput").value;
+      const query = document.getElementById("searchInput").value.trim();
 
-      if (!query.trim()) {
+      if (!query) {
         alert("Please enter product name!");
         return;
       }
 
       localStorage.setItem("searchQuery", query);
-      window.location.href = "products.html"; // Next page
+      window.location.href = "products.html";
     }
 
-    // Go to category page
     function goCategory() {
       window.location.href = "category.html";
     }
 
-    // Logout
     function logout() {
       localStorage.removeItem("user");
       window.location.href = "index.html";
     }
+
   </script>
 
 </body>
