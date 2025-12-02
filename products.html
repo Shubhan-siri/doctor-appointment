@@ -5,21 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Available Products</title>
   <link rel="stylesheet" href="style.css" />
+
   <style>
     #searchBox {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
+      margin: 15px 0;
       border-radius: 5px;
       border: 1px solid #ccc;
       font-size: 16px;
-    }
-
-    .product-card {
-      border:1px solid #ccc; 
-      padding:15px; 
-      margin-top:10px; 
-      border-radius:8px;
     }
 
     .navbar {
@@ -28,6 +22,35 @@
       align-items: center;
       padding: 10px;
       background-color: #f2f2f2;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .product-card {
+      display: flex;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+      border: 2px solid #ccc;
+    }
+
+    .product-details h4 {
+      margin: 0 0 8px;
     }
 
     .logout-btn {
@@ -45,31 +68,28 @@
   </div>
 
   <div class="container">
-
-    <!-- Search box -->
     <input type="text" id="searchBox" placeholder="Search products..." />
 
-    <!-- Dynamic product list -->
     <div id="productList"></div>
-
   </div>
 
   <script>
     function logout() {
-      localStorage.removeItem("loggedIn"); // sirf login state clear
+      localStorage.removeItem("loggedIn");
       window.location.href = "index.html";
     }
 
-    // Initialize default products
     let allProducts = JSON.parse(localStorage.getItem("products")) || [];
 
+    // Add default products (with images)
     if (!allProducts.some(p => p.name === "Machine Rice Flour")) {
       allProducts.push({
         name: "Machine Rice Flour",
         category: "Machinery",
         price: 200000,
         gate: 12,
-        broker: "+91 9876543210"
+        broker: "+91 9876543210",
+        image: "images/rice.jpg"  // <-- Add your image here
       });
     }
 
@@ -79,17 +99,16 @@
         category: "Machinery",
         price: 150000,
         gate: 15,
-        broker: "+91 9876543211"
+        broker: "+91 9876543211",
+        image: "images/wheet.jpg" // <-- And here also
       });
     }
 
-    // Save back to localStorage
     localStorage.setItem("products", JSON.stringify(allProducts));
 
     const productList = document.getElementById("productList");
     const searchBox = document.getElementById("searchBox");
 
-    // Function to display products
     function displayProducts(products) {
       if (products.length === 0) {
         productList.innerHTML = "<p>No products available.</p>";
@@ -100,11 +119,14 @@
       products.forEach((p) => {
         html += `
           <div class="product-card">
-            <h4>${p.name}</h4>
-            <p><strong>Price:</strong> ₹${p.price}</p>
-            <p><strong>Category:</strong> ${p.category}</p>
-            <p><strong>Gate Number:</strong> ${p.gate || "-"}</p>
-            <p><strong>Broker Number:</strong> ${p.broker || "-"}</p>
+            <img src="${p.image || 'images/noimg.png'}" alt="Product Image">
+            <div class="product-details">
+              <h4>${p.name}</h4>
+              <p><strong>Price:</strong> ₹${p.price}</p>
+              <p><strong>Category:</strong> ${p.category}</p>
+              <p><strong>Gate Number:</strong> ${p.gate}</p>
+              <p><strong>Broker Number:</strong> ${p.broker}</p>
+            </div>
           </div>
         `;
       });
@@ -112,17 +134,15 @@
       productList.innerHTML = html;
     }
 
-    // Initial display on page load
     window.onload = function () {
-      displayProducts(allProducts); // Always show full products list
+      displayProducts(allProducts);
     };
 
-    // Live search
     searchBox.addEventListener("input", function () {
-      const query = searchBox.value.toLowerCase();
+      const q = searchBox.value.toLowerCase();
       const filtered = allProducts.filter(p =>
-        p.name.toLowerCase().includes(query) || 
-        p.category.toLowerCase().includes(query)
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
       );
       displayProducts(filtered);
     });
