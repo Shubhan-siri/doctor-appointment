@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="navbar">
+    <h2>Products</h2>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="container">
+
+    <h3>Available Product</h3>
+
+    <div class="product-card" style="border:1px solid #ccc; padding:15px; margin-top:10px; border-radius:8px;">
+      <h4>Machine Rice Flour</h4>
+      <p><strong>Price:</strong> ₹ 2,00,000</p>
+      <p><strong>Category:</strong> Machinery</p>
+      <p><strong>Gate Number:</strong> 12</p>
+      <p><strong>Broker Number:</strong> +91 9876543210</p>
+    </div>
+
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
