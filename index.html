@@ -1,67 +1,33 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shubhan Marketplace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In / Sign Up</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Shubhan Marketplace</h1>
-    <div id="top-right">
-      <span id="welcome"></span>
-      <button id="logoutBtn" class="hidden">Logout</button>
-      <a id="adminLink" class="hidden" href="admin.html">Admin</a>
+
+  <div class="auth-container">
+    <h2>Welcome</h2>
+
+    <div class="auth-box">
+      <h3>Sign In</h3>
+      <input type="email" id="loginEmail" placeholder="Email" />
+      <input type="password" id="loginPassword" placeholder="Password" />
+      <button onclick="login()">Sign In</button>
     </div>
-  </header>
 
-  <main class="container">
-    <section class="card">
-      <h2>Sign Up / Login</h2>
-      <div id="auth-section">
-        <input id="nameInput" placeholder="Name (for signup)" />
-        <input id="emailInput" placeholder="Email" />
-        <input id="passwordInput" type="password" placeholder="Password" />
-        <div class="row">
-          <button id="signupBtn">Sign Up</button>
-          <button id="loginBtn">Login</button>
-        </div>
-        <p id="authMsg" class="error"></p>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Search & Category</h2>
-      <input id="searchInput" placeholder="Search products..." />
-      <select id="categorySelect">
-        <option value="All">All</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>Products</h2>
-      <div id="productCount"></div>
-      <div id="productGrid" class="grid"></div>
-    </section>
-  </main>
-
-  <!-- product popup -->
-  <div id="productModal" class="modal hidden">
-    <div class="modal-content">
-      <span id="closeModal" class="close">×</span>
-      <h3 id="modalName"></h3>
-      <p id="modalCategory"></p>
-      <p id="modalPrice"></p>
-      <p><strong>Gate Number:</strong> <span id="modalGate"></span></p>
-      <div id="modalBrokerArea"></div>
+    <div class="auth-box">
+      <h3>Sign Up</h3>
+      <input type="text" id="signupName" placeholder="Full Name" />
+      <input type="email" id="signupEmail" placeholder="Email" />
+      <input type="password" id="signupPassword" placeholder="Password" />
+      <button onclick="signup()">Sign Up</button>
     </div>
+
   </div>
 
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
