@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Shubhan Marketplace</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header><h1>Admin Panel</h1><a href="index.html">Back</a></header>
+  <main class="container">
+    <section class="card">
+      <h2>Add / Edit Product</h2>
+      <input id="prodName" placeholder="Name" />
+      <input id="prodCategory" placeholder="Category" />
+      <input id="prodPrice" placeholder="Price" type="number" />
+      <input id="prodGate" placeholder="Gate Number" />
+      <input id="prodBroker" placeholder="Broker Number" />
+      <div class="row">
+        <button id="saveProdBtn">Save Product</button>
+        <button id="clearProdBtn">Clear</button>
+      </div>
+      <p id="prodMsg" class="error"></p>
+    </section>
+
+    <section class="card">
+      <h2>Existing Products</h2>
+      <div id="adminProducts" class="grid"></div>
+    </section>
+  </main>
+
+  <script>
+    // admin.js inline to keep simple — actual code in app.js will handle admin too
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
