@@ -81,28 +81,28 @@
 
     let allProducts = JSON.parse(localStorage.getItem("products")) || [];
 
-    // Add default products (with images)
-    if (!allProducts.some(p => p.name === "Machine Rice Flour")) {
-      allProducts.push({
-        name: "Machine Rice Flour",
-        category: "Machinery",
-        price: 200000,
-        gate: 12,
-        broker: "+91 9876543210",
-        image: "images/rice.jpg"  // <-- Add your image here
-      });
-    }
+   if (!allProducts.some(p => p.name === "Machine Rice Flour")) {
+  allProducts.push({
+    name: "Machine Rice Flour",
+    category: "Machinery",
+    price: 200000,
+    gate: 12,
+    broker: "+91 9876543210",
+    image: "products-Shubhan/images/rice.jpg"
+  });
+}
 
-    if (!allProducts.some(p => p.name === "Wheet Floor Machine")) {
-      allProducts.push({
-        name: "Wheet Floor Machine",
-        category: "Machinery",
-        price: 150000,
-        gate: 15,
-        broker: "+91 9876543211",
-        image: "images/wheet.jpg" // <-- And here also
-      });
-    }
+if (!allProducts.some(p => p.name === "Wheet Floor Machine")) {
+  allProducts.push({
+    name: "Wheet Floor Machine",
+    category: "Machinery",
+    price: 150000,
+    gate: 15,
+    broker: "+91 9876543211",
+    image: "products-Shubhan/images/wheet.jpg"
+  });
+}
+
 
     localStorage.setItem("products", JSON.stringify(allProducts));
 
