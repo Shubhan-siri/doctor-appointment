@@ -34,3 +34,19 @@ function login() {
     alert("Incorrect Email or Password");
   }
 }
+
+// Add default product to localStorage if not exists
+window.onload = function() {
+  if (!localStorage.getItem("products")) {
+    const defaultProduct = [
+      {
+        name: "Machine Rice Flour",
+        category: "Machinery",
+        price: 200000,
+        gate: 12,
+        broker: "+91 9876543210"
+      }
+    ];
+    localStorage.setItem("products", JSON.stringify(defaultProduct));
+  }
+};
