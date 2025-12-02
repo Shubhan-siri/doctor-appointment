@@ -9,6 +9,13 @@
 
 <body>
 
+  <!-- LOGIN PROTECTION -->
+  <script>
+    if (!localStorage.getItem("loggedIn")) {
+      window.location.href = "index.html";
+    }
+  </script>
+
   <div class="navbar">
     <h2>Product Finder</h2>
     <button class="logout-btn" onclick="logout()">Logout</button>
@@ -29,7 +36,6 @@
   <script>
     function searchProduct() {
       const query = document.getElementById("searchInput").value.trim();
-
       if (!query) {
         alert("Please enter product name!");
         return;
@@ -44,7 +50,7 @@
     }
 
     function logout() {
-      localStorage.removeItem("user");
+      localStorage.removeItem("loggedIn");   // <-- FIXED
       window.location.href = "index.html";
     }
   </script>
