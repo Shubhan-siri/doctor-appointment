@@ -15,6 +15,26 @@
       border: 1px solid #ccc;
       font-size: 16px;
     }
+
+    .product-card {
+      border:1px solid #ccc; 
+      padding:15px; 
+      margin-top:10px; 
+      border-radius:8px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .logout-btn {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -27,7 +47,7 @@
 
   <div class="container">
 
-    <h3>Available Product</h3>
+    <h3>Available Products</h3>
 
     <!-- Search box -->
     <input type="text" id="searchBox" placeholder="Search products..." />
@@ -38,13 +58,37 @@
   </div>
 
   <script>
+    // Logout function
     function logout() {
-      localStorage.removeItem("user");
+      localStorage.removeItem("loggedIn"); // sirf login state clear
       window.location.href = "index.html";
     }
 
-    // Fetch all products from localStorage
-    const allProducts = JSON.parse(localStorage.getItem("products")) || [];
+    // Initialize default products if missing
+    let allProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+    if (!allProducts.some(p => p.name === "Machine Rice Flour")) {
+      allProducts.push({
+        name: "Machine Rice Flour",
+        category: "Machinery",
+        price: 200000,
+        gate: 12,
+        broker: "+91 9876543210"
+      });
+    }
+
+    if (!allProducts.some(p => p.name === "Wheet Floor Machine")) {
+      allProducts.push({
+        name: "Wheet Floor Machine",
+        category: "Machinery",
+        price: 150000,
+        gate: 15,
+        broker: "+91 9876543211"
+      });
+    }
+
+    // Save back to localStorage
+    localStorage.setItem("products", JSON.stringify(allProducts));
 
     const productList = document.getElementById("productList");
     const searchBox = document.getElementById("searchBox");
@@ -59,7 +103,7 @@
       let html = "";
       products.forEach((p) => {
         html += `
-          <div class="product-card" style="border:1px solid #ccc; padding:15px; margin-top:10px; border-radius:8px;">
+          <div class="product-card">
             <h4>${p.name}</h4>
             <p><strong>Price:</strong> ₹${p.price}</p>
             <p><strong>Category:</strong> ${p.category}</p>
@@ -74,7 +118,6 @@
 
     // Initial display
     window.onload = function () {
-      // If searchResult exists, show that first
       const searchResult = JSON.parse(localStorage.getItem("searchResult"));
       if (searchResult && searchResult.length > 0) {
         displayProducts(searchResult);
